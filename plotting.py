@@ -3,10 +3,12 @@ import plotly.graph_objects as go
 from scipy.signal import argrelextrema
 import numpy as np
 
+# https://raposa.trade/blog/higher-highs-lower-lows-and-calculating-price-trends-in-python/
+
 ticker = 'NQ=F'
 
 #df = yf.download(tickers=ticker, period='6mo', interval='1d')
-df = yf.download(tickers = ticker, start='2022-01-04', end='2022-02-24')
+df = yf.download(tickers = ticker, start='2022-01-04', end='2022-05-26')
 
 df = df.reset_index()
 
