@@ -1,4 +1,3 @@
-import pandas as pd
 import yfinance as yf
 import plotly.graph_objects as go
 from scipy.signal import argrelextrema
@@ -6,7 +5,9 @@ import numpy as np
 
 ticker = 'NQ=F'
 
-df = yf.download(tickers=ticker, period='6mo', interval='1d')
+#df = yf.download(tickers=ticker, period='6mo', interval='1d')
+df = yf.download(tickers = ticker, start='2022-01-04', end='2022-02-24')
+
 df = df.reset_index()
 
 max_idx = argrelextrema(df['Close'].values, np.greater, order=5)[0]
@@ -18,7 +19,6 @@ fig1 = go.Figure(data=[go.Candlestick(x=df['Date'],
                                       high=df['High'],
                                       low=df['Low'],
                                       close=df['Close'])])
-
 Size = 10
 Width = 1
 
@@ -56,4 +56,7 @@ fig1.add_trace(
     )
 )
 
-fig1.show()
+# fig1.show()
+
+fig1.write_html( 'output_file_name.html',
+                   auto_open=True )
