@@ -7,9 +7,20 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
 
-ticker = 'NQ=F'
-yfObj = yf.Ticker(ticker)
-data = yfObj.history(start='2020-01-01', end='2022-05-26')
+ticker = 'ES=F'
+
+# use "period" instead of start/end
+# valid periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max
+# (optional, default is '1mo')
+# period = "ytd",
+
+# fetch data by interval (including intraday if period < 60 days)
+# valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
+# (optional, default is '1d')
+# interval = "1m",
+
+#data = yf.download(tickers = ticker, start='2020-01-04', end='2021-12-10')
+data = yf.download(tickers = ticker, period = "1mo", internval="1h")
 
 max_idx = argrelextrema(data['Close'].values, np.greater, order=5)[0]
 min_idx = argrelextrema(data['Close'].values, np.less, order=5)[0]
